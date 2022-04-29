@@ -1,0 +1,20 @@
+# Ignore virtual env folder#
+###################
+**/*venv*/**
+
+# Ignore archived version of notebooks and python stuffs #
+###################
+*.ipynb_checkpoints
+*.__pycache__
+
+# Ignore dev folders
+###################
+.devcontainer
+.vscode
+
+# Ignore neo4j folders
+###################
+/neo4j/data/
+/neo4j/logs/
+/neo4j/import/
+/neo4j/plugins/

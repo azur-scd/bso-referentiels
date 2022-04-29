@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SCD Alignement de référentiels disciplinaires</title>
+    <!-- JQuery and Uikit-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/css/uikit.min.css" />
+    <!--goJS-->
+    <script src="https://unpkg.com/gojs@2.2.7/release/go.js"></script>
+    <!--neovis-->
+    <script src="https://cdn.neo4jlabs.com/neovis.js/v1.5.0/neovis.js"></script>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename= 'css/test.css')}}">
+</head>
+
+<body>
+    <!--https://getuikit.com/v2/docs/layouts_contact.html-->
+    <h2 class="uk-heading-line uk-text-center"><span>Alignement de référentiels disciplinaires</span></h2>
+    <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+        <li><a href="#">Interface d'alignement</a></li>
+        <li><a href="#">Network</a></li>
+        <li><a href="#">Liste des API</a></li>
+    </ul>
+    <ul class="uk-switcher uk-margin">
+        <li>
+            <div class="uk-section uk-section-muted">
+                <div class="uk-container">
+                    <div id="spinner" class="uk-text-center" uk-spinner="ratio: 3"></div>
+                    <div id="treeviz">
+                        <div id="treeMapperDiagram"
+                            style="width: 100%; height:600px;position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0); cursor: auto;">
+                        </div>
+                    </div>
+                </div>
+                <a href="" uk-totop></a>
+            </div>
+            <div class="uk-section uk-section-secondary">
+                <div class="uk-container">
+                    <h3>Données</h3>
+                    <textarea id="mySavedModel" class="uk-textarea" style="width:100%;height:300px"></textarea>
+                    <a href="" uk-totop></a>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="uk-section uk-section-muted">
+                <div class="uk-container">
+                    <h3>Network</h3>
+                    <p uk-margin>
+                        <button id="network-stabilize"
+                            class="uk-button uk-button-default uk-button-small">Stabilize</button>
+                        <input id="filter-string" class="uk-input uk-form-width-medium uk-form-small" type="text"
+                            placeholder="enter">
+                        <button id="network-filter"
+                            class="uk-button uk-button-secondary uk-button-small">Filtrer</button>
+                        <button id="network-reload" class="uk-button uk-button-default uk-button-small">Reload</button>
+                    </p>
+                    <div class="uk-text-center">
+                        <div id="networkviz"></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="uk-section uk-section-muted">
+                <div class="uk-container">
+            <h3>Listes</h3>
+            <table class="uk-table uk-table-justify uk-table-divider">
+                <thead>
+                    <tr>
+                        <th class="uk-width-small">Descriptif</th>
+                        <th>Méthode</th>
+                        <th>url</th>
+                        <th>Lien/exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Liste (à plat) de toutes les catégories et sous-catégories Dewey</td>
+                        <td>GET</td>
+                         <td>/api/v0/dewey_flat</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/dewey_flat" target="_blanck">Voir les données</a></td>
+                    </tr>
+                    <tr>
+                        <td>Liste imbriquée de toutes les catégories et sous-catégories Dewey</td>
+                        <td>GET</td>
+                         <td>/api/v0/dewey_nested</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/dewey_nested" target="_blanck">Voir les données</a></td>
+                    </tr>
+                    <tr>
+                        <td>Liste (à plat) de tous des domaines et sous-domaines de HAL</td>
+                        <td>GET</td>
+                         <td>/api/v0/hal_flat</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/hal_flat" target="_blanck">Voir les données</a></td>
+                    </tr>
+                    <tr>
+                        <td>Liste imbriquée de tous des domaines et sous-domaines de HAL</td>
+                        <td>GET</td>
+                         <td>/api/v0/hal_nested</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/hal_nested" target="_blanck">Voir les données</a></td>
+                    </tr>
+                    <tr>
+                        <td>Liste (à plat) des catégories de classification du BSO</td>
+                        <td>GET</td>
+                         <td>/api/v0/bso_flat</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/bso_flat" target="_blanck">Voir les données</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="uk-divider-icon">
+            <h3>Détail par classe</h3>
+            <table class="uk-table uk-table-justify uk-table-divider">
+                <thead>
+                    <tr>
+                        <th class="uk-width-small">Descriptif</th>
+                        <th>Méthode</th>
+                        <th>url</th>
+                        <th>Lien/exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Détail d'une catégorie Dewey (avec sous-catégories et alignements HAL/BSO), accès par id interne</td>
+                        <td>GET, POST, DELETE</td>
+                         <td>/api/v0/dewey/id/{id}</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/dewey/id/47" target="_blanck">Voir un exemple</a></td>
+                    </tr>
+                    <tr>
+                        <td>Détail d'une catégorie Dewey (avec sous-catégories et alignements HAL/BSO), accès par classe Dewey</td>
+                        <td>GET</td>
+                         <td>/api/v0/dewey/classe/{classe}</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/dewey/classe/500" target="_blanck">Voir un exemple</a></td>
+                    </tr>
+                    <tr>
+                        <td>Détail d'un domaine HAL (avec sous-domaines et alignements vers la Dewey), accès par id interne</td>
+                        <td>GET, POST, DELETE</td>
+                         <td>/api/v0/hal/id/{id}</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/hal/id/114" target="_blanck">Voir un exemple</a></td>
+                    </tr>
+                    <tr>
+                        <td>Détail d'une classification BSO (alignements vers la Dewey), accès par id interne</td>
+                        <td>GET, POST, DELETE</td>
+                         <td>/api/v0/bso/id/{id}</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/bso/id/501" target="_blanck">Voir un exemple</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="uk-divider-icon">
+            <h3>Noeuds et liens du graphe</h3>
+            <table class="uk-table uk-table-justify uk-table-divider">
+                <thead>
+                    <tr>
+                        <th class="uk-width-small">Descriptif</th>
+                        <th>Méthode</th>
+                        <th>url</th>
+                        <th>Lien/exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sous-graphe des noeuds Dewey</td>
+                        <td>GET</td>
+                         <td>/api/v0/dewey_nodes_edges_sub</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/dewey_nodes_edges_sub" target="_blanck">Voir les données</a></td>
+                    </tr>
+                    <tr>
+                        <td>Sous-graphe des noeuds Dewey et des noeuds Dewey + BSO liées</td>
+                        <td>GET</td>
+                         <td>/api/v0/dewey_nodes_edges_same_as</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./DeweyNodesAndEdgesSameas" target="_blanck">Voir les données</a></td>
+                    </tr>
+                    <tr>
+                        <td>Sous-graphe des noeuds Hal</td>
+                        <td>GET</td>
+                         <td>/api/v0/hal_nodes_edges_sub</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/hal_nodes_edges_sub" target="_blanck">Voir les données</a></td>
+                    </tr>
+                    <tr>
+                        <td>Sous-graphe des noeuds Hal et des noeuds Dewey liées</td>
+                        <td>GET</td>
+                         <td>/api/v0/hal_nodes_edges_same_as</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/hal_nodes_edges_same_as" target="_blanck">Voir les données</a></td>
+                    </tr>
+                    <tr>
+                        <td>Sous-graphe des noeuds BSO et des noeuds Dewey liées</td>
+                        <td>GET</td>
+                         <td>/api/v0/bso_nodes_edges_same_as</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/bso_nodes_edges_same_as" target="_blanck">Voir les données</a></td>
+                    </tr>
+                    <tr>
+                        <td>Graphe complet (tous les noeuds et tous les liens</td>
+                        <td>GET</td>
+                         <td>/api/v0/graph_nodes_edges</td>
+                        <td><a class="uk-button uk-button-default" type="button" href="./api/v0/graph_nodes_edges" target="_blanck">Voir les données</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            </div>
+        </li>
+    </ul>
+    <footer class="uk-section uk-section-default uk-section-small">
+        <div class="uk-container">
+            <p class="uk-text-small uk-text-center">2022 - SCD Université Côte d'Azur - Sidoc
+                <!--<a href="https://github.com/zzseba78/Kick-Off">Created by KickOff</a>-->
+                | Built with
+                <a href="http://getuikit.com" target="_blank" data-uk-tooltip>
+                    <span data-uk-icon="uikit"></span>
+                </a>
+            </p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/js/uikit-icons.min.js"></script>
+    <script src="{{ url_for('static', filename= 'js/treeMapper.js')}}"></script>
+    <script src="{{ url_for('static', filename= 'js/network.js')}}"></script>
+</body>
+
+</html>
