@@ -18,6 +18,7 @@ neo4j/data/
 neo4j/logs/
 neo4j/import/
 neo4j/plugins/
+!neo4j/.gitkeep
 !neo4j/data/.gitkeep
 !neo4j/logs/.gitkeep
 !neo4j/import/.gitkeep
