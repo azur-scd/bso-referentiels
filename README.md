@@ -30,7 +30,8 @@ La méthodologie (et le code Python) de récupération puis de chargement sous f
 A la racine du projet
 
 ```
-docker run --name <YOUR_CONTENEUR_NAME> -p 7474:7474 -p 7687:7687 -p 5000:5000 -d -v <YOUR_PATH>/neo4j/data:/data -v <YOUR_PATH>/neo4j/logs:/logs -v <YOUR_PATH>/neo4j/import:/var/lib/neo4j/import -v <YOUR_PATH>/neo4j/plugins:/plugins --env NEO4J_AUTH=<YOUR_DB_USER>/<YOUR_DB_PASSWORD> --env NEO4JLABS_PLUGINS=["apoc"] neo4j:latest
+docker build -t <YOUR_IMAGE_NAME>:<YOUR_IMAGE_TAG> .
+docker run --name <YOUR_CONTENEUR_NAME> -p 7474:7474 -p 7687:7687 -p 5000:5000 -d -v <YOUR_PATH>/neo4j/data:/data -v <YOUR_PATH>/neo4j/logs:/logs -v <YOUR_PATH>/neo4j/import:/var/lib/neo4j/import -v <YOUR_PATH>/neo4j/plugins:/plugins --env NEO4J_AUTH=neo4j/admin --env NEO4JLABS_PLUGINS=["apoc"] <YOUR_IMAGE_NAME>:<YOUR_IMAGE_TAG>
 ```
 
 Si vous êtes sous Windows, ajouter les variables d'environnement suivantes dans la commande (cf [https://neo4j.com/developer/docker-run-neo4j/](https://neo4j.com/developer/docker-run-neo4j/))
@@ -43,6 +44,8 @@ L'application est accessible sur le port 5000 [http://localhost:5000/bso-referen
 
 > Vous pouvez modifier le subpath de l'url 'bso-referentiels' dans app/.env
 
+> Les identifiants (username/password) de la base de donnée Ne4j sont passés avec la variable d'environnement --env NEO4J_AUTH=neo4j/admin dans la commande de run du conteneur. Ils peuvent bien sûr être changés, il fudra alors veiller à reporter vos nouveaux identifiants dans app/.env et app/static/js/network.je
+
 #### 2ème possibilité : builder 2 conteneurs séparés pour l'application et la bdd
 
 A la racine du projet
@@ -53,6 +56,19 @@ docker-compose up
 L'application est accessible sur le port 5000 [http://localhost:5000/bso-referentiels](http://localhost:5000/bso-referentiels) et l'interface graphique (browser) de Neo4j sur le port 7474 [http://localhost:7474/browser/](http://localhost:7474/browser/)
 
 > Vous pouvez modifier le subpath de l'url 'bso-referentiels' dans app/.env
+
+> Les identifiants (username/password) de la base de donnée Ne4j sont passés avec la variable d'environnement NEO4J_AUTH dans le fichier .env. Ils peuvent bien sûr être changés, il fudra alors veiller à reporter vos nouveaux identifiants dans app/.env et app/static/js/network.je
+
+### Sans Docker
+
+- Installer une instance Neo4j et créer une base de données
+- Cloner le dépôt Git 
+- Dans app/ :
+  - créer un environnement virtuel et l'activer
+  - installer les dépendances pip install -r requirements.txt
+  - configurer vos identifiants Neo4j dans .env et static/js/network.js
+  - Lancer en mode dev : python app.py
+  - lancer en prod : gunicorn --bind=0.0.0.0:5000 wsgi:app 
 
 ## Todo
 
