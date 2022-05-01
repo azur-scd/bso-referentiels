@@ -13,13 +13,13 @@ L'objectif est d'ensuite s'appuyer sur ce mapping afin de pouvoir réconcilier l
 
 En backend les classes disciplinaires alignées sont modélisées en graphe et stockées dans une base de données Neo4J.
 
-Un ensemble d'endpoints d'API Rest sont également délivrés afin d'exposer le mapping dans un format structuré et de le rendre interopérable pour être exploité, notamment par les différents workflows de constitution et d'enrichissements des données du baromètre.
+Un ensemble d'endpoints d'API Rest est également délivré afin d'exposer le mapping dans un format structuré et de le rendre interopérable pour être exploité par les différents workflows de constitution et d'enrichissements des données du baromètre.
 
 ## Initialisation de la base de données
 
 Avant de pouvoir aligner les référentiels, il faut  - évidemment - tout d'abord les charger dans la base de données Neo4j.
 
-La méthodologie (et le code Python) de récupération puis de chargement sous forme de noeuds et de liens hiérachiques est décrite dans le notebook init_db_load/notebook_get_data.ipynb
+La méthodologie (et le code Python) de récupération puis de chargement sous forme de noeuds et de liens hiérarchiques est décrite dans le notebook init_db_load/notebook_get_data.ipynb
 
 ## Installation
 
@@ -44,7 +44,7 @@ L'application est accessible sur le port 5000 [http://localhost:5000/bso-referen
 
 > Vous pouvez modifier le subpath de l'url 'bso-referentiels' dans app/.env
 
-> Les identifiants (username/password) de la base de donnée Ne4j sont passés avec la variable d'environnement --env NEO4J_AUTH=neo4j/admin dans la commande de run du conteneur. Ils peuvent bien sûr être changés, il fudra alors veiller à reporter vos nouveaux identifiants dans app/.env et app/static/js/network.je
+> Les identifiants (username/password) de la base de donnée Ne4j sont passés avec la variable d'environnement --env NEO4J_AUTH=neo4j/admin dans la commande de run du conteneur. Ils peuvent bien sûr être changés, il faudra alors veiller à reporter vos nouveaux identifiants dans app/.env et app/static/js/network.je
 
 #### 2ème possibilité : builder 2 conteneurs séparés pour l'application et la bdd
 
@@ -57,7 +57,7 @@ L'application est accessible sur le port 5000 [http://localhost:5000/bso-referen
 
 > Vous pouvez modifier le subpath de l'url 'bso-referentiels' dans app/.env
 
-> Les identifiants (username/password) de la base de donnée Ne4j sont passés avec la variable d'environnement NEO4J_AUTH dans le fichier .env. Ils peuvent bien sûr être changés, il fudra alors veiller à reporter vos nouveaux identifiants dans app/.env et app/static/js/network.je
+> Les identifiants (username/password) de la base de donnée Ne4j sont passés avec la variable d'environnement NEO4J_AUTH dans le fichier .env. Ils peuvent bien sûr être changés, il faudra alors veiller à reporter vos nouveaux identifiants dans app/.env et app/static/js/network.je
 
 ### Sans Docker
 
