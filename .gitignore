@@ -23,3 +23,7 @@ neo4j/plugins/*
 !neo4j/logs/.gitkeep
 !neo4j/import/.gitkeep
 !neo4j/plugins/.gitkeep
+
+# Ignore docker backup script
+#############################
+backup_volume.bat

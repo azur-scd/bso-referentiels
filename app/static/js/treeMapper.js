@@ -299,7 +299,7 @@ class MappingLink extends go.Link {
 
     // Create some random trees in each group
     var nodeDataArray = [
-      { isGroup: true, key: -1, text: "Hal", xy: "0 100", width: 200 },
+      { isGroup: true, key: -1, text: "Hal", xy: "100 100", width: 200 },
       { isGroup: true, key: -2, text: "Dewey", xy: "500 100", width: 200 },
       { isGroup: true, key: -3, text: "BSO", xy: "900 100", width: 150 }
     ];
@@ -313,7 +313,7 @@ class MappingLink extends go.Link {
           data.nodes.map(function(d) {
             let name = "";
             if (d.classe) {name += d.classe + " " + d.name} else {name += d.name}
-            return  nodeDataArray.push({"key":d.id,"text": name, "group": groupkey})})
+            return  nodeDataArray.push({"key":d.meta_id,"text": name, "group": groupkey})})
           data.edges.map(function(d){return linkDataArray.push(d)})
         })
     }

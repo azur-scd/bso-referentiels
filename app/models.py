@@ -1,7 +1,7 @@
 from dotenv import dotenv_values
 from neomodel import (config, StructuredNode, StructuredRel,StringProperty, IntegerProperty, UniqueIdProperty, DateProperty, DateTimeProperty, RelationshipTo, RelationshipFrom, Q, Traversal, OUTGOING, INCOMING, EITHER)
 import datetime
-env = dotenv_values("./.env")
+env = dotenv_values(".env")
 #-----Neo4j database----- #
 config.DATABASE_URL = env["NEO4J_BOLT_URL"]
 
@@ -20,8 +20,8 @@ class SameasRelationship(StructuredRel):
     on_date = DateProperty(default = datetime.datetime.now)
 
 class DeweyDomain(StructuredNode):
-    id = UniqueIdProperty()
-    meta_id = IntegerProperty(unique_index=True,required=True)
+    _id = UniqueIdProperty()
+    meta_id = IntegerProperty(index=True,default=0)
     classe =  StringProperty(unique_index=True,required=True)
     name = StringProperty(unique_index=True,required=True)
     dewey_has_subclass = RelationshipTo("DeweyDomain", "HAS_SUBCLASS", model = SubclassRelationship)
@@ -29,7 +29,7 @@ class DeweyDomain(StructuredNode):
     dewey_sameas_bso = RelationshipFrom("BsoDomain", "SAME_AS", model = SameasRelationship)
     def to_json(self):
         return {
-        "id": self.meta_id,
+        "_id": self._id,
         "meta_id": self.meta_id,
         "classe": self.classe,
         "name": self.name,
@@ -49,21 +49,21 @@ dewey_sameas_definition = dict(node_class=DeweyDomain, direction=INCOMING,
                   relation_type='SAME_AS', model=SameasRelationship)
 
 class BsoDomain(StructuredNode):
-    id = UniqueIdProperty()
-    meta_id = IntegerProperty(unique_index=True,required=True)
+    _id = UniqueIdProperty()
+    meta_id = IntegerProperty(index=True,default=0)
     name = StringProperty(unique_index=True,required=True)
     bso_sameas_dewey = RelationshipTo("DeweyDomain", "SAME_AS", model = SameasRelationship)
     def to_json(self):
         return {
-        "id": self.id,
+        "_id": self._id,
         "meta_id": self.meta_id,
         "name": self.name,
         "group": "hal"
       }
 
 class HalDomain(StructuredNode):
-    id = UniqueIdProperty()
-    meta_id = IntegerProperty(unique_index=True,required=True)
+    _id = UniqueIdProperty()
+    meta_id = IntegerProperty(index=True,default=0)
     docid = StringProperty(unique_index=True,required=True)
     name = StringProperty(unique_index=True,required=True)
     code = StringProperty(unique_index=True,required=True)
@@ -73,7 +73,7 @@ class HalDomain(StructuredNode):
     hal_sameas_dewey = RelationshipTo("DeweyDomain", "SAME_AS", model = SameasRelationship)
     def to_json(self):
         return {
-        "id": self.id,
+        "_id": self._id,
         "meta_id": self.meta_id,
         "docid": self.docid,
         "name": self.name,

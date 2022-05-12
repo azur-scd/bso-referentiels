@@ -1,4 +1,4 @@
-docid,level,parent,code,label
+docid,level,parent_id,code,label
 1,0,0,chim,chim = Chimie
 2,1,1,chim.anal,chim.anal = Chimie/Chimie analytique
 3,1,1,chim.cata,chim.cata = Chimie/Catalyse

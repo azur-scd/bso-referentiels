@@ -1,0 +1,101 @@
+code,label
+000,"Informatique, information, ouvrages généraux"
+100,"Philosophie,ParapsychologieetOccultisme,Psychologie"
+200,Religions
+300,Sciences sociales
+400,Langues
+500,Sciencesde la nature etMathématiques
+600,Technologie (Sciences appliquées)
+700,"Arts,LoisirsetSports"
+800,Littérature(Belles-Lettres) et techniques d’écriture
+900,"Géographie,Histoireet disciplines auxiliaires"
+010,Bibliographies
+020,Sciences de l'information et des bibliothèques
+030,Encyclopédies générales
+040,[Vacant]
+050,Publications en série d’ordre général
+060,Organisations générales et muséologie
+070,"Médias documentaires, journalisme, édition"
+080,Recueils généraux
+090,"Manuscrits, livres rares, autres documents imprimés rares"
+110,Métaphysique
+120,"Épistémologie, causalité, finalité, genre humain"
+130,Parapsychologie et occultisme
+140,Les divers systèmes et écoles philosophiques
+150,Psychologie
+160,Logique
+170,Éthique
+180,"Philosophie antique, médiévale, orientale"
+190,Philosophie occidentale contemporaine et autres philosophies non orientales
+210,Philosophieet théorie de lareligion
+220,Bible[5]
+230,Christianisme.Théologiechrétienne[5]
+240,Théologie morale et spirituelle chrétiennes[5]
+250,Égliseschrétiennes locales etordres religieuxchrétiens[5]
+260,Théologiechrétienne et société etEcclésiologie[5]
+270,Histoire et géographie duchristianismeet de l’Église chrétienne[5]
+280,Confessions et sectes de l'Église chrétienne
+290,Autres religions
+310,Statistiquesgénérales
+320,Science politique
+330,Économie
+340,Droit
+350,Administration publique. Art etscience militaire
+360,Problèmes et services sociaux. Associations
+370,"Éducation,enseignement"
+380,"Commerce, communications, transports"
+390,"Coutumes,savoir-vivre,folklore"
+410,Linguistiquegénérale
+420,Langue anglaise. Anglo-saxon
+430,Langues germaniques.Allemand
+440,Langues romanes.Français
+450,"Italien,sarde,dalmate,roumain,langues rhéto-romanes"
+460,Languesespagnoleetportugaise
+470,Langues italiques.Latin
+480,Langues helléniques.Grec classique
+490,Autreslangues
+510,Mathématiques
+520,Astronomieet sciences connexes
+530,Physique
+540,Chimieet sciences connexes
+550,Sciences de la Terre
+560,Paléontologie.Paléozoologie
+570,Sciences de la vie.Biologie
+580,Plantes.Botanique
+590,Animaux.Zoologie
+610,Sciences médicales. Médecine
+620,Art de l’ingénieuret activités connexes
+630,"Agronomie,agricultureet activités connexes"
+640,Économie domestique(arts ménagers). Vie familiale
+650,Gestion de l'entreprise et services auxiliaires
+660,Génie chimique(chimie industrielle) et techniques connexes
+670,Fabrication industrielle
+680,Fabrications de produits à usages particuliers
+690,Bâtiments
+710,Urbanisme. Art du paysage
+720,Architecture
+730,Arts plastiques.Sculpture
+740,Dessin.Arts décoratifs
+750,Lapeintureet lespeintures
+760,Arts graphiques. Lagravureet les gravures
+770,Photographieet photographies
+780,Musique
+790,Loisirsetarts du spectacle.Sports
+810,Littérature américaine de langue anglaise
+820,Littératures anglaise et anglo-saxonne
+830,Littérature des langues germaniques. Littérature allemande
+840,Littérature des langues romanes.Littérature française
+850,"Littératures italienne, roumaine,rhéto-romane"
+860,Littératures espagnole et portugaise
+870,Littératures des langues italiques. Littérature latine
+880,Littératures des langues helléniques. Littérature grecque classique
+890,Littératures des autres langues
+910,Géographieetvoyages
+920,"Biographie, généalogie, emblèmes, insignes"
+930,Histoire générale du monde ancien
+940,Histoire générale de l’Europe. Europe de l'Ouest
+950,Histoire générale de l’Asie. Orient. Extrême-Orient
+960,Histoire générale de l’Afrique
+970,Histoire générale de l’Amérique du Nord
+980,Histoire générale de l’Amérique du Sud
+990,Histoire générale des autres pays du monde. Océanie

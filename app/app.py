@@ -6,8 +6,6 @@ import pandas as pd
 import json
 from dotenv import dotenv_values
 from neomodel import (config, db, StructuredNode, StructuredRel,StringProperty, IntegerProperty, UniqueIdProperty, DateProperty, RelationshipTo, RelationshipFrom, Q, Traversal, OUTGOING, INCOMING, EITHER)
-import sys
-sys.path.append('./modules')
 from models import *
 
 class ReverseProxied(object):

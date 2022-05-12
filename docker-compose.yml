@@ -9,11 +9,10 @@ services:
     ports:
       - 7474:7474
       - 7687:7687
+    networks:
+      - neo4j_ref_net
     volumes:
-      - ./neo4j/data:/data
-      - ./neo4j/logs:/logs
-      - ./neo4j/import:/var/lib/neo4j/import
-      - ./neo4j/plugins:/plugins
+      - neo4j-referentiel-domains-volume:/data
         
   web:
     build: ./app/.
@@ -23,9 +22,15 @@ services:
       - ./app/.env
     ports: 
       - 5000:5000
+    networks:
+      - neo4j_ref_net
     links:
       - db:db
 
 volumes:
-  db:
-  testdb:
+  neo4j-referentiel-domains-volume:
+    external: true
+  
+networks:
+  neo4j_ref_net:
+    driver: bridge
